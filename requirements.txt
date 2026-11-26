@@ -1,0 +1,14 @@
+# Core pipeline (tested with Python 3.8 and 3.10)
+numpy>=1.21
+pandas>=1.2
+scikit-learn>=1.2
+xgboost>=1.7
+matplotlib>=3.5
+
+# Dragonnet only (skip with: python main.py --skip-dragonnet)
+tensorflow>=2.10
+
+# LLM interpretive layer only (python main.py --llm openai|anthropic)
+openai>=1.0
+anthropic
+python-dotenv

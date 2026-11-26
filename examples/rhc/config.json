@@ -1,0 +1,39 @@
+{
+  "name": "Effect of Right Heart Catheterization on 30-Day Mortality in Critically Ill Patients",
+  "data": "https://hbiostat.org/data/repo/rhc.csv",
+
+  "treatment": {"column": "swang1", "treated_value": "RHC"},
+  "outcome":   {"column": "dth30", "positive_value": "Yes",
+                "type": "binary", "direction": "adverse"},
+
+  "covariates": ["age", "sex", "race", "income", "edu",
+                 "cat1", "ca",
+                 "cardiohx", "chfhx", "dementhx", "chrpulhx",
+                 "renalhx", "liverhx", "malighx", "immunhx", "amihx",
+                 "aps1", "meanbp1", "hrt1", "resp1",
+                 "temp1", "pafi1", "alb1", "crea1",
+                 "card", "resp", "neuro", "gastr",
+                 "renal", "meta", "hema", "seps"],
+  "categorical": "auto",
+
+  "problem_description": "problem_description.md",
+  "data_description": "data_description.md",
+  "actionable": true,
+
+  "split": {"eval_size": 0.2, "policy_size": 0.2, "seed": 1983, "stratify": "outcome"},
+  "n_bootstrap": 100,
+
+  "models": {
+    "S-LR": {},
+    "T-LR": {},
+    "R-Forest": {"n_estimators": 150, "max_depth": 6, "min_samples_split": 4, "random_state": 42},
+    "S-kNN": {"n_neighbors": 7, "metric": "l2"},
+    "S-GBM": {"n_estimators": 200, "max_depth": 5, "learning_rate": 0.05, "random_state": 42},
+    "Dragonnet": {},
+    "C-XGBoost (treg)": {"n_estimators": 150, "max_depth": 5, "min_child_weight": 1,
+                         "max_leaves": 4, "learning_rate": 0.05, "reg_alpha": 3.0,
+                         "tree_method": "hist", "epsilon": 0.001},
+    "C-XGBoost": {"n_estimators": 200, "max_depth": 4, "min_child_weight": 2,
+                  "max_leaves": 4, "learning_rate": 0.1, "tree_method": "hist"}
+  }
+}
